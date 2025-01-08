@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>おすすめ ラーメン二郎 ジェネレーター</title>
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
   <link
@@ -16,24 +16,27 @@
       background-color: #FFD700; /* 背景を原色に近い黄色 */
       font-family: "Work Sans", "Noto Sans", sans-serif;
     }
-    /* タイトルはTailwind CSSで指定 */
-    /* 例: text-5xl, font-extrabold, text-center, my-8 など */
-    
+
     /* タイル部分のスタイル */
     .tile {
       background-color: #FFFACD; /* タイルを薄い黄色に */
-      width: 100px;
-      height: 100px;
+      width: 150px;              /* ★ タイルの幅を拡大 */
+      height: 150px;             /* ★ タイルの高さを拡大 */
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 8px;
       cursor: pointer;
       border: 2px solid transparent;
+      text-align: center;
     }
     .tile.selected {
       background-color: #FFE066; /* 選択時の色 */
       border: 2px solid #FFAA00;
+    }
+    /* 店舗名を太字にする */
+    .tile-name {
+      font-weight: bold; /* 太字 */
     }
   </style>
 </head>
@@ -42,20 +45,26 @@
   <h1 class="text-5xl font-extrabold text-center my-8">
     おすすめ <span class="text-red-500">ラーメン</span>二郎 ジェネレーター
   </h1>
-  
-  <!-- コンテンツ -->
-  <div class="relative flex size-full min-h-screen flex-col justify-between group/design-root overflow-x-hidden">
+  <!-- 説明文を追加 -->
+  <p class="text-center mb-6">
+    行ったことのある店舗を選択してNextボタンを押してください
+  </p>
+
+  <!-- コンテンツ全体のコンテナ -->
+  <div class="relative flex size-full flex-col justify-between group/design-root overflow-x-hidden">
     <!-- タイルを配置する領域 -->
     <div>
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-3 p-4" id="store-container">
-        <!-- タイルは script.js で生成されます -->
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 p-4" id="store-container">
+        <!-- 
+          タイルは script.js などで生成される想定。 
+          例えば、生成時に「<div class='tile'><span class='tile-name'>店舗名</span></div>」のように。
+        -->
       </div>
     </div>
 
-    <!-- Nextボタン  -->
+    <!-- Nextボタンを中央に配置 -->
     <div>
-      <div class="flex px-4 py-3">
-        <!-- 後で script.js でクリックイベントを登録しやすいように id を付与 -->
+      <div class="flex justify-center px-4 py-3">
         <button
           id="nextButton"
           class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 flex-1 bg-[#FAC638] text-[#AB2217] text-base font-bold leading-normal tracking-[0.015em]"

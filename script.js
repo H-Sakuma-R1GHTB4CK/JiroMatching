@@ -20,8 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
     Stores.forEach((storeName) => {
       const tile = document.createElement("div");
       tile.classList.add("tile");
-      tile.innerText = storeName;
-  
+
+    // ★ 店舗名用の要素を生成して .tile-name を付与
+    const tileNameElement = document.createElement("span");
+    tileNameElement.classList.add("tile-name");
+    tileNameElement.innerText = storeName;
+    // タイルに店舗名要素を追加
+    tile.appendChild(tileNameElement);
+    
       // クリック時の処理
       tile.addEventListener("click", () => {
         // 選択状態の切り替え

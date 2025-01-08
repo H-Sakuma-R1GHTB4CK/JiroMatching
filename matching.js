@@ -44,9 +44,39 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("=== 評価結果 ===");
         console.table(preferences);
         statusMessage.textContent = "ご協力ありがとうございました！";
+        // ---------------------------
+        // 2. ★ すべての評価が終わったタイミングでサーバーへ送信する
+        // ---------------------------
+        sendDataToServer(preferences);
       }
     }
-  
+    // ---------------------------
+    // 3. サーバーへデータを送信する関数
+    // ---------------------------
+    function sendDataToServer(data) {
+      // EC2上のサーバーURL (例)
+      //  - <YOUR_EC2_PUBLIC_IP_OR_DOMAIN> の部分を実際の IP or ドメインに置き換えてください
+      //  - ポートは Flask で 5000 にしているなら :5000 を含める
+      const serverUrl = "http://57.180.51.248:5000/echo";
+
+      fetch(serverUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        // preferences オブジェクトをJSON文字列に変換して送信
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(returnedData => {
+          console.log("サーバーからのレスポンス:", returnedData);
+          // 例: { status: "OK", receivedData: { … } }
+          alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
+        })
+        .catch(error => {
+          console.error("サーバー通信エラー:", error);
+        });
+    }
     // ボタンを隠す関数
     function hideButtons() {
       likeButton.style.display = "none";
