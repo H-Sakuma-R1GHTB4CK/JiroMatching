@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>おすすめ ラーメン二郎 ジェネレーター</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+  <link
+    rel="stylesheet"
+    as="style"
+    onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
+  />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    body {
+      background-color: #FFD700; /* 背景を原色に近い黄色 */
+      font-family: "Work Sans", "Noto Sans", sans-serif;
+    }
+    /* タイトルはTailwind CSSで指定 */
+    /* 例: text-5xl, font-extrabold, text-center, my-8 など */
+    
+    /* タイル部分のスタイル */
+    .tile {
+      background-color: #FFFACD; /* タイルを薄い黄色に */
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .tile.selected {
+      background-color: #FFE066; /* 選択時の色 */
+      border: 2px solid #FFAA00;
+    }
+  </style>
+</head>
+<body>
+  <!-- タイトル -->
+  <h1 class="text-5xl font-extrabold text-center my-8">
+    おすすめ <span class="text-red-500">ラーメン</span>二郎 ジェネレーター
+  </h1>
+  
+  <!-- コンテンツ -->
+  <div class="relative flex size-full min-h-screen flex-col justify-between group/design-root overflow-x-hidden">
+    <!-- タイルを配置する領域 -->
+    <div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-3 p-4" id="store-container">
+        <!-- タイルは script.js で生成されます -->
+      </div>
+    </div>
+
+    <!-- Nextボタン  -->
+    <div>
+      <div class="flex px-4 py-3">
+        <!-- 後で script.js でクリックイベントを登録しやすいように id を付与 -->
+        <button
+          id="nextButton"
+          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 flex-1 bg-[#FAC638] text-[#AB2217] text-base font-bold leading-normal tracking-[0.015em]"
+        >
+          <span class="truncate">Next</span>
+        </button>
+      </div>
+      <div class="h-5 bg-[#FFD700]"></div>
+    </div>
+  </div>
+
+  <!-- スクリプト -->
+  <script src="script.js"></script>
+</body>
+</html>

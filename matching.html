@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>店舗マッチング</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+  <link
+    rel="stylesheet"
+    as="style"
+    onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: "Work Sans", "Noto Sans", sans-serif;
+      background-color: #FFFAE0;
+    }
+    .card {
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      padding: 20px;
+      text-align: center;
+    }
+    .store-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div class="card" id="matchingCard">
+    <h1 class="text-2xl font-bold mb-4">店舗マッチング</h1>
+
+    <!-- 店舗名を表示する要素 -->
+    <div id="storeName" class="store-name"></div>
+
+    <!-- すき・ふつう・すきじゃないボタン -->
+    <div class="flex justify-around mt-6">
+      <button
+        id="likeButton"
+        class="bg-green-300 hover:bg-green-400 text-white font-bold py-2 px-4 rounded"
+      >
+        すき
+      </button>
+      <button
+        id="neutralButton"
+        class="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
+      >
+        ふつう
+      </button>
+      <button
+        id="dislikeButton"
+        class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
+      >
+        すきじゃない
+      </button>
+    </div>
+
+    <!-- 次の店舗へ or 終了メッセージ用の要素 -->
+    <div id="statusMessage" class="mt-6 text-lg font-medium text-center text-gray-700"></div>
+
+    <!-- 戻るボタン -->
+    <button
+      id="backButton"
+      class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+      style="display: none;" <!-- 初期状態は非表示 -->
+    >
+      戻る
+    </button>
+  </div>
+
+  <!-- 外部JavaScriptファイルを読み込む -->
+  <script src="matching.js"></script>
+</body>
+</html>
