@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 「戻る」ボタンの処理
     backButton.addEventListener("click", () => {
       // 選択画面に遷移
-      window.location.href = "select_store.html"; // 適切なパスに変更してください
+      window.location.href = "index.html"; // 適切なパスに変更してください
     });
   
     // 初期表示
