@@ -94,11 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
         sendDataToServer(preferences);
       }
     }
+    let hashedIp = "";
     // サーバーへデータを送信する関数
     async function sendDataToServer(data) {
       try {
         const userIp = await getUserIP();
-        const hashedIp = await hashIP(userIp);
+        hashedIp = await hashIP(userIp);
   
         const payload = {
           user_id: hashedIp, // ハッシュ化されたIPアドレスをuser_idとして送信
@@ -201,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 「戻る」ボタンの処理
     backButton.addEventListener("click", () => {
       // 選択画面に遷移
-      window.location.href = "result.html"; // 適切なパスに変更してください
+      window.location.href = `result.html?user_id=${hashedIp}`; // 適切なパスに変更してください
     });
   
     // 初期表示

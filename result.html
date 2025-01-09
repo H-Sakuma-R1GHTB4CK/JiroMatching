@@ -39,6 +39,13 @@
       max-height: 400px;
       overflow-y: auto;
     }
+    .result-content th {
+        background-color: #f5f5f5; /* ヘッダーの背景色 */
+    }
+    .result-content td {
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
     /* トップに戻るボタンのスタイル */
     #backToTopButton {
       position: absolute;
@@ -80,6 +87,8 @@
     >
       結果を取得
     </button>
+    <div id="referenceDataCount" style="margin-bottom: 10px; font-weight: bold;"></div>
+
   </div>
 
   <!-- 外部JavaScriptファイルを読み込む -->
