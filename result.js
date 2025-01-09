@@ -2,8 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // 要素を取得
     const fetchResultButton = document.getElementById("fetchResultButton");
     const resultContent = document.getElementById("resultContent");
+    const backToTopButton = document.getElementById("backToTopButton"); // トップに戻るボタン
   
-    // ボタンがクリックされたときの処理
+    // 結果を取得するボタンのクリックイベント
     fetchResultButton.addEventListener("click", async () => {
       try {
         // ボタンを一時的に無効化してユーザーに処理中であることを示す
@@ -38,6 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
         fetchResultButton.disabled = false;
         fetchResultButton.textContent = "結果を取得";
       }
+    });
+  
+    // トップに戻るボタンのクリックイベント
+    backToTopButton.addEventListener("click", () => {
+      // index.html に遷移
+      window.location.href = "index.html"; // 必要に応じてパスを調整
     });
   
     // 結果を表示する関数

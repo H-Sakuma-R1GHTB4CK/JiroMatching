@@ -20,12 +20,13 @@
     .card {
       width: 90%;
       max-width: 600px;
-      margin: 0 auto;
+      margin: 20px auto; /* 上下にマージンを追加 */
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.15);
       padding: 20px;
       text-align: center;
+      position: relative; /* ボタンの位置調整のために相対配置 */
     }
     .result-title {
       font-size: 1.5rem;
@@ -38,10 +39,35 @@
       max-height: 400px;
       overflow-y: auto;
     }
+    /* トップに戻るボタンのスタイル */
+    #backToTopButton {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #4A90E2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+    }
+    #backToTopButton:hover {
+      background-color: #357ABD;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center">
   <div class="card" id="resultCard">
+    <!-- トップに戻るボタン -->
+    <button
+      id="backToTopButton"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+    >
+      トップに戻る
+    </button>
+
     <h1 class="text-2xl font-bold mb-4">評価結果</h1>
 
     <!-- 結果を表示する要素 -->
