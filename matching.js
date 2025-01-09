@@ -97,65 +97,62 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     // サーバーへデータを送信する関数
-    function sendDataToServer(data) {
-      getUserIP().then(userIp => {
+    async function sendDataToServer(data) {
+      try {
+        const userIp = await getUserIP();
+        const hashedIp = await hashIP(userIp);
+  
         const payload = {
-          user_ip: userIp,
+          user_id: hashedIp, // ハッシュ化されたIPアドレスをuser_idとして送信
           ratings: data
         };
   
         const serverUrl = "http://api.heilong.jp:5000/echo";
   
-        fetch(serverUrl, {
+        const response = await fetch(serverUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(payload)
-        })
-          .then(response => response.json())
-          .then(returnedData => {
-            console.log("サーバーからのレスポンス:", returnedData);
-            alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
-          })
-          .catch(error => {
-            console.error("サーバー通信エラー:", error);
-          });
-      }).catch(error => {
-        console.error("IP取得エラー:", error);
-        // IPが取得できなかった場合も送信する
-        const payload = {
-          user_ip: "unknown",
-          ratings: data
-        };
-        // 同上のfetch処理を続ける
-        fetch(serverUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        })
-          .then(response => response.json())
-          .then(returnedData => {
-            console.log("サーバーからのレスポンス:", returnedData);
-            alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
-          })
-          .catch(error => {
-            console.error("サーバー通信エラー:", error);
-          });
-      });
+        });
+  
+        if (!response.ok) {
+          throw new Error(`サーバーエラー: ${response.status} ${response.statusText}`);
+        }
+  
+        const returnedData = await response.json();
+        console.log("サーバーからのレスポンス:", returnedData);
+        alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
+      } catch (error) {
+        console.error("データ送信エラー:", error);
+        alert("データ送信中にエラーが発生しました。");
+      }
     }
   
     // ユーザーのIPアドレスを取得する関数（外部サービスを利用）
-    function getUserIP() {
-      return fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => data.ip)
-        .catch(error => {
-          console.error('IP取得エラー:', error);
-          return 'unknown';
-        });
+    async function getUserIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        if (!response.ok) {
+          throw new Error(`IP取得エラー: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data.ip;
+      } catch (error) {
+        console.error('IP取得エラー:', error);
+        return 'unknown';
+      }
+    }
+
+    // ユーザーのIPアドレスをSHA-256でハッシュ化する関数
+    async function hashIP(ip) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(ip);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      return hashHex;
     }
 
     // ボタンを隠す関数
