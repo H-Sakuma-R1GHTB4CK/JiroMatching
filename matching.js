@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ratings: data
         };
   
-        const serverUrl = "http://api.heilong.jp:5000/echo";
+        const serverUrl = "https://api.heilong.jp:5000/echo";
   
         const response = await fetch(serverUrl, {
           method: "POST",
