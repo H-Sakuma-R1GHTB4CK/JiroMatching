@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // EC2上のサーバーURL (例)
       //  - <YOUR_EC2_PUBLIC_IP_OR_DOMAIN> の部分を実際の IP or ドメインに置き換えてください
       //  - ポートは Flask で 5000 にしているなら :5000 を含める
-      const serverUrl = "http://57.180.51.248:5000/echo";
+      const serverUrl = "http://api.heilong.jp:5000/echo";
 
       fetch(serverUrl, {
         method: "POST",
