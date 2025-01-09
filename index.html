@@ -18,7 +18,15 @@
       background-color: #FFD700; /* 背景を原色に近い黄色 */
       font-family: "Work Sans", "Noto Sans", sans-serif;
     }
-
+/* タイルコンテナのスタイル */
+#store-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 最小幅を200pxに設定 */
+      row-gap: 1px; /* 縦方向の間隔を30pxに設定 */
+      column-gap: 20px; /* 横方向の間隔を20pxに設定 */
+      padding: 10px;
+      height: calc(100vh - 10px); /* 必要に応じて調整 */
+    }
     /* タイルの基本スタイル */
 .tile {
   background-color: #f0f0f0; /* タイルの背景色 */
@@ -84,8 +92,8 @@
 
   /* 必要に応じて他の要素のスタイルも調整 */
   #nextButton {
-    font-size: 2.0rem;
-    padding: 36px 72px;
+    font-size: 3.0rem;
+    padding: 40px 40px;
     min-width: 220px;
     height: 90px;
   }
@@ -97,7 +105,7 @@
   }
 
   p {
-    font-size: 1.5rem;
+    font-size: 2.0rem;
     margin-bottom: 20px;
   }
 }
