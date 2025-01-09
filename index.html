@@ -28,6 +28,11 @@
   text-align: center;        /* テキストを中央揃え */
   cursor: pointer;           /* ホバー時にカーソルをポインターに */
   transition: transform 0.2s, box-shadow 0.2s; /* トランジション効果 */
+  /* Flexboxの設定 */
+  display: flex;
+  align-items: center;      /* 垂直方向の中央揃え */
+  justify-content: center;  /* 水平方向の中央揃え */
+  height: 80%;             /* コンテナの高さに合わせる */
 }
 
 /* タイルのホバー時のスタイル */
@@ -73,16 +78,16 @@
 /* アスペクト比が縦長の場合（高さが幅よりも大きい場合） */
 @media (max-aspect-ratio: 1/1) {
   .tile {
-    font-size: 1.2rem; /* フォントサイズを20%増加 */
+    font-size: 2.0rem; /* フォントサイズを20%増加 */
     padding: 25px;      /* パディングも若干増やす */
   }
 
   /* 必要に応じて他の要素のスタイルも調整 */
   #nextButton {
-    font-size: 1.2rem;
-    padding: 18px 36px;
+    font-size: 2.0rem;
+    padding: 36px 72px;
     min-width: 220px;
-    height: 70px;
+    height: 90px;
   }
 
   /* タイトルと説明文のフォントサイズを調整 */
@@ -92,7 +97,7 @@
   }
 
   p {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     margin-bottom: 20px;
   }
 }
