@@ -61,7 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "立川店":"tachikawa",
       "八王子野猿街道店2":"yaen"
     };
-
+    
+    function getStoreId(storeName) {
+      return storeMapping[storeName] || storeName;
+    }
     // 要素を取得
     const storeNameEl = document.getElementById("storeName");
     const likeButton = document.getElementById("likeButton");
@@ -153,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
           return 'unknown';
         });
     }
-    
+
     // ボタンを隠す関数
     function hideButtons() {
       likeButton.style.display = "none";
