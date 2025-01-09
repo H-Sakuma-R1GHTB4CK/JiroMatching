@@ -17,7 +17,51 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // 各店舗に対する評価を格納する (例: { "三田本店": "すき", "仙川店": "ふつう", ... } )
     const preferences = {};
-  
+    
+    // 店舗名から店舗IDへのマッピング
+    const storeMapping = {
+      "三田本店": "mita",
+      "仙川店": "store2_id",
+      "札幌店":"sapporo",
+      "仙台店":"sendai",
+      "会津若松駅前店":"aizu",
+      "新潟店":"niigara",
+      "ひたちなか店":"hitachi",
+      "栃木街道店":"tochigi",
+      "前橋千代田町店":"maebashi",
+      "千葉店":"chiba",
+      "松戸駅前店 Ⅲ":"matsudo",
+      "京成大久保店":"ookubo",
+      "柏店":"kashiwa",
+      "横浜関内店":"kannai",
+      "中山駅前店":"nakayama",
+      "京急川崎店":"kawasaki",
+      "相模大野店":"sagamiono",
+      "湘南藤沢店":"fujisawa",
+      "生田駅前店":"ikuta",
+      "三田本店":"mita",
+      "神田神保町店":"jinbocho",
+      "池袋東口店":"ikebukuro",
+      "新宿歌舞伎町店":"kabuki",
+      "新宿小滝橋通り店":"otakibashi",
+      "上野毛店":"kaminoge",
+      "環七新新代田店":"shindaita",
+      "目黒店":"meguro",
+      "品川店":"shinagawa",
+      "西台駅前店":"nishidai",
+      "桜台駅前店":"sakuradai",
+      "ひばりヶ丘駅前店":"hibari",
+      "千住大橋駅前店":"senjuohashi",
+      "亀戸店":"kameido",
+      "小岩店":"koiwa",
+      "環七一之江店":"ichinoe",
+      "荻窪店":"ogikubo",
+      "仙川店":"sengawa",
+      "府中店":"fuchu",
+      "立川店":"tachikawa",
+      "八王子野猿街道店2":"yaen"
+    };
+
     // 要素を取得
     const storeNameEl = document.getElementById("storeName");
     const likeButton = document.getElementById("likeButton");
@@ -44,39 +88,72 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("=== 評価結果 ===");
         console.table(preferences);
         statusMessage.textContent = "ご協力ありがとうございました！";
-        // ---------------------------
-        // 2. ★ すべての評価が終わったタイミングでサーバーへ送信する
-        // ---------------------------
+        // データをサーバーへ送信する
         sendDataToServer(preferences);
       }
     }
-    // ---------------------------
-    // 3. サーバーへデータを送信する関数
-    // ---------------------------
+    // サーバーへデータを送信する関数
     function sendDataToServer(data) {
-      // EC2上のサーバーURL (例)
-      //  - <YOUR_EC2_PUBLIC_IP_OR_DOMAIN> の部分を実際の IP or ドメインに置き換えてください
-      //  - ポートは Flask で 5000 にしているなら :5000 を含める
-      const serverUrl = "http://api.heilong.jp:5000/echo";
-
-      fetch(serverUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        // preferences オブジェクトをJSON文字列に変換して送信
-        body: JSON.stringify(data)
-      })
-        .then(response => response.json())
-        .then(returnedData => {
-          console.log("サーバーからのレスポンス:", returnedData);
-          // 例: { status: "OK", receivedData: { … } }
-          alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
+      getUserIP().then(userIp => {
+        const payload = {
+          user_ip: userIp,
+          ratings: data
+        };
+  
+        const serverUrl = "http://api.heilong.jp:5000/echo";
+  
+        fetch(serverUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
         })
+          .then(response => response.json())
+          .then(returnedData => {
+            console.log("サーバーからのレスポンス:", returnedData);
+            alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
+          })
+          .catch(error => {
+            console.error("サーバー通信エラー:", error);
+          });
+      }).catch(error => {
+        console.error("IP取得エラー:", error);
+        // IPが取得できなかった場合も送信する
+        const payload = {
+          user_ip: "unknown",
+          ratings: data
+        };
+        // 同上のfetch処理を続ける
+        fetch(serverUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        })
+          .then(response => response.json())
+          .then(returnedData => {
+            console.log("サーバーからのレスポンス:", returnedData);
+            alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
+          })
+          .catch(error => {
+            console.error("サーバー通信エラー:", error);
+          });
+      });
+    }
+  
+    // ユーザーのIPアドレスを取得する関数（外部サービスを利用）
+    function getUserIP() {
+      return fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => data.ip)
         .catch(error => {
-          console.error("サーバー通信エラー:", error);
+          console.error('IP取得エラー:', error);
+          return 'unknown';
         });
     }
+    
     // ボタンを隠す関数
     function hideButtons() {
       likeButton.style.display = "none";
