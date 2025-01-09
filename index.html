@@ -56,7 +56,7 @@
   background-color: #4A90E2;
   color: white;
   border: none;
-  padding: 15px 30px; /* パディングを増やしてボタンを大きく */
+  padding: 30px 45px; /* パディングを増やしてボタンを大きく */
   border-radius: 10px; /* 角を滑らかに */
   cursor: pointer;
   font-size: 1.2rem; /* フォントサイズを大きく */
@@ -70,8 +70,8 @@
   transform: translateX(-50%) scale(1.05); /* ホバー時に少し大きく */
 }
 
-/* スマホなど画面幅が600px以下の場合のスタイル */
-@media (max-width: 600px) {
+/* アスペクト比が縦長の場合（高さが幅よりも大きい場合） */
+@media (max-aspect-ratio: 1/1) {
   .tile {
     font-size: 1.2rem; /* フォントサイズを20%増加 */
     padding: 25px;      /* パディングも若干増やす */
@@ -83,6 +83,25 @@
     padding: 18px 36px;
     min-width: 220px;
     height: 70px;
+  }
+
+  /* タイトルと説明文のフォントサイズを調整 */
+  h1 {
+    font-size: 2rem;
+    margin: 30px 0;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+}
+
+/* アスペクト比が横長の場合（幅が高さよりも大きい場合） */
+@media (min-aspect-ratio: 16/9) {
+  .tile {
+    font-size: 1.1rem; /* フォントサイズを少し増加 */
+    padding: 22px;      /* パディングを調整 */
   }
 }
   </style>
