@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 現在表示中の店舗を指し示すインデックス
     let currentIndex = 0;
   
-    // 各店舗に対する評価を格納する (例: { "三田本店": "すき", "仙川店": "ふつう", ... } )
+    // 各店舗に対する評価を格納する (例: { "mita": 1, "sapporo": 0, ... } )各店舗に対する評価を格納する (例: { "mita": 1, "sapporo": 0, ... } )
     const preferences = {};
     
     // 店舗名から店舗IDへのマッピング
@@ -61,10 +61,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "立川店":"tachikawa",
       "八王子野猿街道店2":"yaen"
     };
-    
+
     function getStoreId(storeName) {
       return storeMapping[storeName] || storeName;
     }
+
     // 要素を取得
     const storeNameEl = document.getElementById("storeName");
     const likeButton = document.getElementById("likeButton");
@@ -184,21 +185,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // ボタンクリック時の処理
     function handlePreference(preference) {
       const currentStore = storeList[currentIndex];
-      preferences[currentStore] = preference;
+      const storeId = getStoreId(currentStore); // 店舗IDを取得
+      preferences[storeId] = preference;
       currentIndex++;
       showStore(currentIndex);
     }
   
     likeButton.addEventListener("click", () => {
-      handlePreference("すき");
+      handlePreference(1);
     });
   
     neutralButton.addEventListener("click", () => {
-      handlePreference("ふつう");
+      handlePreference(0);
     });
   
     dislikeButton.addEventListener("click", () => {
-      handlePreference("すきじゃない");
+      handlePreference(-1);
     });
   
     // 「戻る」ボタンの処理
