@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fetchResultButton.textContent = "取得中...";
   
         // GET /result APIを呼び出す
-        const response = await fetch("http://localhost:5000/result", { // 必要に応じてURLを調整
+        const response = await fetch("https://api.heilong.jp/result", { // 必要に応じてURLを調整
           method: "GET",
           headers: {
             "Content-Type": "application/json"
