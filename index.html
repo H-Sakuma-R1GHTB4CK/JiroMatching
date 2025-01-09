@@ -19,27 +19,58 @@
       font-family: "Work Sans", "Noto Sans", sans-serif;
     }
 
-    /* タイル部分のスタイル */
-    .tile {
-      background-color: #FFFACD; /* タイルを薄い黄色に */
-      width: 150px;              /* ★ タイルの幅を拡大 */
-      height: 150px;             /* ★ タイルの高さを拡大 */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      text-align: center;
-    }
-    .tile.selected {
-      background-color: #FFE066; /* 選択時の色 */
-      border: 2px solid #FFAA00;
-    }
+    /* タイルの基本スタイル */
+.tile {
+  background-color: #f0f0f0; /* タイルの背景色 */
+  border: 2px solid #ddd;    /* タイルの境界線 */
+  border-radius: 8px;        /* タイルの角を丸める */
+  padding: 20px;             /* タイル内の余白 */
+  text-align: center;        /* テキストを中央揃え */
+  cursor: pointer;           /* ホバー時にカーソルをポインターに */
+  transition: transform 0.2s, box-shadow 0.2s; /* トランジション効果 */
+}
+
+/* タイルのホバー時のスタイル */
+.tile:hover {
+  transform: scale(1.05);            /* タイルを5%拡大 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加して浮き上がったように */
+}
+
+/* タイルが選択された状態のスタイル */
+.tile.selected {
+  border-color: #3480d6;             /* 境界線の色を変更 */
+  background-color: #c7edff;         /* 背景色を変更 */
+}
+
+
     /* 店舗名を太字にする */
     .tile-name {
       font-weight: bold; /* 太字 */
     }
+/* Nextボタンのスタイル */
+#nextButton {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  padding: 15px 30px; /* パディングを増やしてボタンを大きく */
+  border-radius: 10px; /* 角を滑らかに */
+  cursor: pointer;
+  font-size: 1.2rem; /* フォントサイズを大きく */
+  transition: background-color 0.3s, transform 0.2s;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 影を追加して立体感を出す */
+}
+
+#nextButton:hover {
+  background-color: #357ABD;
+  transform: translateX(-50%) scale(1.05); /* ホバー時に少し大きく */
+}
+
+
   </style>
 </head>
 <body>
@@ -63,20 +94,15 @@
         -->
       </div>
     </div>
+  </div>
 
     <!-- Nextボタンを中央に配置 -->
-    <div>
-      <div class="flex justify-center px-4 py-3">
-        <button
-          id="nextButton"
-          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 flex-1 bg-[#FAC638] text-[#AB2217] text-base font-bold leading-normal tracking-[0.015em]"
-        >
-          <span class="truncate">Next</span>
-        </button>
-      </div>
-      <div class="h-5 bg-[#FFD700]"></div>
-    </div>
-  </div>
+    <button
+    id="nextButton"
+    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 flex-1 bg-[#FAC638] text-[#AB2217] text-base font-bold leading-normal tracking-[0.015em]"
+  >
+    <span class="truncate">Next</span>
+  </button>
 
   <!-- スクリプト -->
   <script src="script.js"></script>
