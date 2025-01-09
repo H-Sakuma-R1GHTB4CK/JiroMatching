@@ -20,8 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // 店舗名から店舗IDへのマッピング
     const storeMapping = {
-      "三田本店": "mita",
-      "仙川店": "store2_id",
       "札幌店":"sapporo",
       "仙台店":"sendai",
       "会津若松駅前店":"aizu",
@@ -123,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
         const returnedData = await response.json();
         console.log("サーバーからのレスポンス:", returnedData);
-        alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
+        // alert("サーバーからのレスポンス:\n" + JSON.stringify(returnedData, null, 2));
       } catch (error) {
         console.error("データ送信エラー:", error);
         alert("データ送信中にエラーが発生しました。");
@@ -203,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 「戻る」ボタンの処理
     backButton.addEventListener("click", () => {
       // 選択画面に遷移
-      window.location.href = "index.html"; // 適切なパスに変更してください
+      window.location.href = "result.html"; // 適切なパスに変更してください
     });
   
     // 初期表示
