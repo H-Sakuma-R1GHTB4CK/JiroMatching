@@ -17,6 +17,7 @@
     body {
       background-color: #FFD700; /* 背景を原色に近い黄色 */
       font-family: "Work Sans", "Noto Sans", sans-serif;
+      padding-bottom: 10vw; /* 全体の下に余白を追加 */
     }
 /* タイルコンテナのスタイル */
 #store-container {
@@ -25,7 +26,7 @@
       row-gap: 1px; /* 縦方向の間隔を30pxに設定 */
       column-gap: 20px; /* 横方向の間隔を20pxに設定 */
       padding: 10px;
-      height: calc(100vh - 10vw); /* 必要に応じて調整 */
+      height: calc(90vh - 10vw); /* 必要に応じて調整 */
     }
     /* タイルの基本スタイル */
 .tile {
@@ -62,8 +63,9 @@
     }
 /* Nextボタンのスタイル */
 #nextButton {
+  margin-top: 20vw; /* ボタンの上に余白を追加 */
   position: fixed;
-  bottom: 20px;
+  bottom: 2vw;
   left: 50%;
   transform: translateX(-50%);
   background-color: #4A90E2;
@@ -85,6 +87,9 @@
 
 /* アスペクト比が縦長の場合（高さが幅よりも大きい場合） */
 @media (max-aspect-ratio: 1/1) {
+  #store-container {
+      height: calc(88vh - 5vw); /* 必要に応じて調整 */
+    }
   .tile {
     font-size: 2.0rem; /* フォントサイズを20%増加 */
     padding: 25px;      /* パディングも若干増やす */
