@@ -57,7 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "仙川店":"sengawa",
     "府中店":"fuchu",
     "立川店":"tachikawa",
-    "八王子野猿街道店2":"yaen"
+    "八王子野猿街道店2":"yaen",
+    "京都店":"kyoto"
   };
 
   function getStoreId(storeName) {
