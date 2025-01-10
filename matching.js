@@ -49,6 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
     "西台駅前店":"nishidai",
     "桜台駅前店":"sakuradai",
     "ひばりヶ丘駅前店":"hibari",
+    "めじろ台店":"mejiro",
+    "川越店":"kawagoe",
+    "越谷店":"koshigaya",
+    "大宮公園駅前店":"oomiya",
+    "一橋学園店":"hitotsubashi",
     "千住大橋駅前店":"senjuohashi",
     "亀戸店":"kameido",
     "小岩店":"koiwa",
@@ -58,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "府中店":"fuchu",
     "立川店":"tachikawa",
     "八王子野猿街道店2":"yaen",
-    "京都店":"kyoto"
+    "京都店":"kyoto",
+    "朝倉街道駅前店":"asakura"
   };
 
   function getStoreId(storeName) {
