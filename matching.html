@@ -32,6 +32,20 @@
       font-weight: 700;
       margin: 10px 0;
     }
+    /* トップに戻るボタンのスタイル */
+    #backToTopButton {
+      background-color: #4A90E2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+    }
+    #backToTopButton:hover {
+      background-color: #357ABD;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center">
@@ -65,7 +79,8 @@
 
     <!-- 次の店舗へ or 終了メッセージ用の要素 -->
     <div id="statusMessage" class="mt-6 text-lg font-medium text-center text-gray-700"></div>
-
+    <!-- 例: body の中にトップに戻るボタンを追加 -->
+    <button id="backToTopButton" style="display: none;">トップに戻る</button>
     <!-- 戻るボタン -->
     <button
       id="backButton"
